@@ -18,10 +18,21 @@ class Order(models.Model):
     order_phone = models.CharField(max_length=200, verbose_name= 'Телефон')
     order_status = models.ForeignKey(StatusCrm, on_delete=models.PROTECT, null=True, blank=True, verbose_name='Статус')
 
-    def __str__(self):        # изменение отображения данных пользователя
+    def __str__(self):
         return self.order_name
 
     class Meta:
-        verbose_name = 'Заказ'  # изменение раздела где пользователи
-        verbose_name_plural = 'Заказы' # изменение оглавления слева для перехода в пользователи
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
 
+class ComentCrm(models.Model):
+    coment_binding = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Заявка')
+    coment_text = models.TextField(verbose_name='Текст комментария')
+    coment_dt = models.DateTimeField(auto_now=True, verbose_name='Дата создания')
+
+    def __str__(self):
+        return self.coment_text
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
