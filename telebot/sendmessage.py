@@ -1,14 +1,12 @@
 import requests
-
-
-
-token = '5632017300:AAEcljLU0CpgYMQ7G3rhoNcKve7QEa5GAJo'
-chat_id = '-851492043'
-text = 'Test_2'
-
+from .models import TeleSetings
 
 
 def sendTelegram():
+    settings = TeleSetings.objects.get(pk=1)
+    token = str(settings.tg_token)
+    chat_id = str(settings.tg_chat)
+    text = str(settings.tg_message)
     api = 'https://api.telegram.org/bot'
     method = api + token + '/sendMessage'
 
@@ -16,5 +14,3 @@ def sendTelegram():
         'chat_id': chat_id,
         'text': text
         })
-
-sendTelegram()    
